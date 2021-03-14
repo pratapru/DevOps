@@ -1,0 +1,65 @@
+awk command
+syntax:
+	- awk options 'BEGIN {start_action} patter/condition {action to perform on each record/line} END {stop_action}' filename
+	- command | awk options 'BEGIN {} patter/condition {} END {}'
+	- awk -f awk_script.awk filename
+	- ./awk_script.awk filename (Shebang line must be included)
+	
+Here are the actions
+	- BEGIN block is performed before reading the filename
+	- END block is performed after processing the filename
+	- Rest of the actions are performed while processing the filename
+
+Note:
+	- Need at least one action to run awk script.
+	- No need of input for BEGIN actions
+	- Input is required only for middle actions and END actions.
+
+How to initialized variable in awk ?
+	- awk 'BEGIN { a=5 }'
+
+How to display variable value and execute multiple statements ?
+	- awk 'BEGIN { a=5 ; print a }'
+	- a statement is seperated by ;
+	- the logic in single quote can be kept in a file as well and used in awk command  (e.g awk -f simple.awk)
+	cat simple.awk
+		BEGIN {
+			a=5;
+			print a
+		}
+	
+	- Inorder to run it as script, you have specify the Shebang line in the file.
+	#!/bin/awk -f
+		BEGIN {
+        a=5;
+        print a
+		}
+		
+awk variable:-
+How to read variable values from command line ?
+	- the best place to initialized your variable is BEGIN block.
+	- echo "2 6" | awk '{print "a=" $1, "b=" $2 }'
+	- Read variable for awk command using shell script
+		#!/bin/bash
+		read -p "Enter value for a: " a
+		read -p "Enter value for b: " b
+		#echo "$a $b" | awk '{ a=$1 ; b=$2; print "a="a, "b="b}'
+		awk -v a=$a -v b=$b 'BEGIN { print a+b}'
+
+========================================================================================================	
+Introduction to sed command:
+	- sed command stands for stream editor.
+	- sed command perform lots of function on file like
+		- viewing file content
+		- searching
+		- find and replace
+		- insertion and deletion 
+	- sed also supports regular expression which allows it to perform complex pattern matching.
+
+Advantage of sed over vi/vim editors:
+	-Edit your file without opening it.
+Syntax:
+	- sed [options] commands [file-to-work-with-sed]
+	
+
+		
